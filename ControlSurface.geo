@@ -102,5 +102,13 @@ Plane Surface(6) = {6};
 Curve Loop(7) = {13,14};
 Plane Surface(7) = {7};
 
+Curve Loop(8) = { 4, 24, -9, -25 };
+Surface(8) = {8};
+Curve Loop(9) = { 5, -24, -10, 25 };
+Surface(9) = {9};
 
+Curve Loop(10) = { 11, 26, -13, -27 };
+Surface(10) = {10};
+Curve Loop(11) = { 12, -26, -14, 27 };
+Surface(11) = {11};
 
