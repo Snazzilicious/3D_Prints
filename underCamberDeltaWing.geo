@@ -51,8 +51,6 @@ Plane Surface(3) = { 3 };
 Curve Loop(4) = { -2,-5, -4,7 };
 Surface(4) = { 4 };
 
-// Crest
-//Line(9) = { 3, 6 };
 
 
 
