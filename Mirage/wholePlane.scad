@@ -35,11 +35,11 @@ module wing(rootLength,root_h, tipLength,tip_h, span){
 
 
 
-//module Mirage2000_body() {
+//module Mirage2000_body(s,l,thickness) {
 //	
 //	pts = [];
 //	
-//	linear_extrude(5){
+//	linear_extrude(thickness){
 //		polygon(pts);
 //	}
 //}
@@ -47,14 +47,12 @@ module wing(rootLength,root_h, tipLength,tip_h, span){
 
 
 
-module Mirage2000_body() {
-	s=55;
-	l=430;
+module Mirage2000_body(s,l,thickness) {
 	
 	th = 80;
 	tw = 90;
 	
-	linear_extrude(5){
+	linear_extrude(thickness){
 		// Nose
 		translate([0.35*s,l,0])
 		intersection(){
@@ -103,6 +101,26 @@ module Mirage2000_body() {
 }
 
 
+module controlSurface(l,th,d){
+	pts = [[0,0],[th,th],[d/2,th],[d,th/2],[d/2,0]];
+	
+	linear_extrude(l){
+		polygon(pts);
+	}
+
+	translate([th,th-e,l/10])
+	cube(size=[10,10,2]);
+}
+
+module controlSurfaceCutout(l,th,d,h=50){
+	pts = [[-th,th],[0,0],[0,-h/2],[d,-h/2],[d,h/2],[-th,h/2]];
+	
+	linear_extrude(l){
+		polygon(pts);
+	}
+}
+
+
 // Fudge factor
 e = 0.001;
 
@@ -127,11 +145,21 @@ motor2_pos = 0.55*wingLength;
 // Aileron and aileron cut out specifications
 aileronStart = 30;
 aileronLength = 100;
-aileronDepth = 20;
+aileronDepth = 30;
+aileronThickness = 3;
+
+// rudder and cut out specs
+rudderStart = 7;
+rudderLength = 40;
+rudderDepth = 30;
+rudderThickness = 5;
+
+// control surface wiggle room
+wiggleRoom = 1;
 
 // Body specifications
-fuselageLength = 600.0;
-fuselageH = 70.0;
+fuselageLength = 430.0;
+fuselageH = 55.0;
 fuselageThickness = 5.0;
 
 wingPos = 5.0;
@@ -147,7 +175,7 @@ difference() {
 
 		translate([fuselageThickness/2,0,0])
 		rotate([0,-90,0])
-		Mirage2000_body();
+		Mirage2000_body(fuselageH,fuselageLength,fuselageThickness);
 
 	}
 
@@ -158,12 +186,30 @@ difference() {
 	translate([0,motor2_pos+wingPos,motor_rad-e])
 	rotate([-90,0,0])
 	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+	
+	// aileron cut out
+	translate([-aileronStart+wiggleRoom,wingPos+aileronDepth,0])
+	rotate([90,0,-90])
+	controlSurfaceCutout( aileronLength+2*wiggleRoom, 2*aileronThickness, 1.25*aileronDepth );
+	
+	// rudder cut out
+	translate([-fuselageThickness/2,rudderDepth,rudderStart+fuselageH -wiggleRoom])
+	rotate([0,0,-90])
+	controlSurfaceCutout( rudderLength+2*wiggleRoom, 2*rudderThickness, 1.25*rudderDepth );
 
 }
 
+translate([-aileronStart,wingPos+aileronDepth -3,0])
+rotate([90,0,-90])
+controlSurface( aileronLength, aileronThickness, aileronDepth );
+
+translate([-fuselageThickness/2, rudderDepth -3, rudderStart+fuselageH])
+rotate([0,0,-90])
+controlSurface( rudderLength, rudderThickness, rudderDepth );
 
 
 
+//controlSurface( aileronLength, aileronThickness, aileronDepth );
 
 
 
