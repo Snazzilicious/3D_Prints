@@ -164,7 +164,8 @@ fuselageThickness = 5.0;
 
 wingPos = 5.0;
 
-noseLength = 0.12*fuselageLength;
+
+
 
 difference() {
 
@@ -209,7 +210,6 @@ controlSurface( rudderLength, rudderThickness, rudderDepth );
 
 
 
-//controlSurface( aileronLength, aileronThickness, aileronDepth );
 
 
 
