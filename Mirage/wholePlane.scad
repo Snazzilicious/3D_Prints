@@ -10,36 +10,46 @@ module motorCutOut( length, width, rad, spac ) {
 
 // x goes from 0 to 1, t determines thickness
 function naca_half_thickness(x,t) = 5*t*(0.2969*sqrt(x) - 0.1260*x - 0.3516*pow(x,2) + 0.2843*pow(x,3) - 0.1015*pow(x,4));
-function naca_pts(t,n) = [ for (x=[0:1/(n-1):1]) [x, naca_half_thickness(x,t)]];
+function naca_pts(t,n,s=1) = [ for (x=[0:1/(n-1):1]) [s*x, s*naca_half_thickness(x,t)]];
 module wing(rootLength,root_h, tipLength,tip_h, span){
 
 	root_t = root_h / rootLength;
 	tip_t = tip_h / tipLength;
 
-	nPtsRoot = 50;
-	nPtsTip = 50;
+	nPtsRoot = 100;
+	nPtsTip = 100;
 	
 	hull(){
 		// Root cross section
 		linear_extrude(height=e){
-			scale([rootLength,rootLength,1.0])
-			polygon(naca_pts(root_t,nPtsRoot));
+			polygon(naca_pts(root_t,nPtsRoot,rootLength));
 		}
 
 		// Tip cross section
 		translate([rootLength-tipLength,0,span])
 		linear_extrude(height=e){
-			scale([tipLength,tipLength,1.0])
-			polygon(naca_pts(tip_t,nPtsTip));
+			polygon(naca_pts(tip_t,nPtsTip,tipLength));
 		}
 	}
 }
 
 
 
+//module Mirage2000_body() {
+//	
+//	pts = [];
+//	
+//	linear_extrude(5){
+//		polygon(pts);
+//	}
+//}
+
+
+
+
 module Mirage2000_body() {
-	s=70;
-	l=460;
+	s=55;
+	l=430;
 	
 	th = 80;
 	tw = 90;
@@ -124,30 +134,30 @@ fuselageLength = 600.0;
 fuselageH = 70.0;
 fuselageThickness = 5.0;
 
-wingPos = 20.0;
+wingPos = 5.0;
 
 noseLength = 0.12*fuselageLength;
 
 difference() {
 
-union(){
-	translate([-2.5,wingLength + wingPos,0])
-	rotate([90,0,-90])
-	wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
+	union(){
+		translate([-fuselageThickness/2,wingLength + wingPos,0])
+		rotate([90,0,-90])
+		wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
 
-	translate([2.5,0,0])
-	rotate([0,-90,0])
-	Mirage2000_body();
+		translate([fuselageThickness/2,0,0])
+		rotate([0,-90,0])
+		Mirage2000_body();
 
-}
+	}
 
-translate([0,motor1_pos+wingPos,motor_rad-e])
-rotate([-90,0,0])
-motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+	translate([0,motor1_pos+wingPos,motor_rad-e])
+	rotate([-90,0,0])
+	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
 
-translate([0,motor2_pos+wingPos,motor_rad-e])
-rotate([-90,0,0])
-motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+	translate([0,motor2_pos+wingPos,motor_rad-e])
+	rotate([-90,0,0])
+	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
 
 }
 
