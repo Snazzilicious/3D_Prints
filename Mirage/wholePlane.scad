@@ -13,8 +13,8 @@ function naca_half_thickness(x,t) = 5*t*(0.2969*sqrt(x) - 0.1260*x - 0.3516*pow(
 function naca_pts(t,n,s=1) = [ for (x=[0:1/(n-1):1]) [s*x, s*naca_half_thickness(x,t)]];
 module wing(rootLength,root_h, tipLength,tip_h, span){
 
-	root_t = root_h / rootLength;
-	tip_t = tip_h / tipLength;
+	root_t = 2*root_h / rootLength;
+	tip_t = 2*tip_h / tipLength;
 
 	nPtsRoot = 100;
 	nPtsTip = 100;
@@ -126,10 +126,10 @@ e = 0.001;
 
 // Wing parameters
 wingLength = 380.0;
-wingRootHeight = 20;
+wingRootHeight = 7;
 
 wingTipLength = 20.0;
-wingTipHeight = 5;
+wingTipHeight = 2.5;
 
 wingSpan = wingLength / 2.0;
 
@@ -152,7 +152,7 @@ aileronThickness = 3;
 rudderStart = 7;
 rudderLength = 40;
 rudderDepth = 30;
-rudderThickness = 5;
+rudderThickness = 3;
 
 // control surface wiggle room
 wiggleRoom = 1;
@@ -160,7 +160,7 @@ wiggleRoom = 1;
 // Body specifications
 fuselageLength = 430.0;
 fuselageH = 55.0;
-fuselageThickness = 5.0;
+fuselageThickness = 3.0;
 
 wingPos = 5.0;
 
