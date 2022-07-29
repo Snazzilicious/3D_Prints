@@ -54,7 +54,7 @@ module Mirage2000_body(s,l,thickness) {
 	
 	linear_extrude(thickness){
 		// Nose
-		translate([0.35*s,l,0])
+		translate([0.35*s,.99*l,0])
 		intersection(){
 			translate([0.35*s,0,0])
 			scale([1,1.7,1])
@@ -65,7 +65,7 @@ module Mirage2000_body(s,l,thickness) {
 		}
 		
 		// fuselage
-		square([s,l]);
+		square([s,0.98*l]);
 		
 		// canopy
 		translate([0.75*s,0.95*l,0])
@@ -159,7 +159,7 @@ wiggleRoom = 1;
 
 // Body specifications
 fuselageLength = 430.0;
-fuselageH = 55.0;
+fuselageH = motor_rad + prop_rad + 10;
 fuselageThickness = 3.0;
 
 wingPos = 5.0;

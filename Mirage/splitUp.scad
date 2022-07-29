@@ -46,7 +46,6 @@ module wing(rootLength,root_h, tipLength,tip_h, span){
 
 
 
-
 module Mirage2000_body(s,l,thickness) {
 	
 	th = 80;
@@ -54,7 +53,7 @@ module Mirage2000_body(s,l,thickness) {
 	
 	linear_extrude(thickness){
 		// Nose
-		translate([0.35*s,l,0])
+		translate([0.35*s,.99*l,0])
 		intersection(){
 			translate([0.35*s,0,0])
 			scale([1,1.7,1])
@@ -65,7 +64,7 @@ module Mirage2000_body(s,l,thickness) {
 		}
 		
 		// fuselage
-		square([s,l]);
+		square([s,0.98*l]);
 		
 		// canopy
 		translate([0.75*s,0.95*l,0])
@@ -159,52 +158,53 @@ wiggleRoom = 1;
 
 // Body specifications
 fuselageLength = 430.0;
-fuselageH = 55.0;
+fuselageH = motor_rad + prop_rad + 10;
 fuselageThickness = 3.0;
 
 wingPos = 5.0;
 
 
-// wing 1/2
-intersection(){
 
-translate([-200,200,-100])
-cube([220,220,220]);
+//// wing 1/2
+//intersection(){
 
-difference() {
+//translate([-200,200,-100])
+//cube([220,220,220]);
 
-	union(){
-		translate([-fuselageThickness/2,wingLength + wingPos,0])
-		rotate([90,0,-90])
-		wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
+//difference() {
 
-//		translate([fuselageThickness/2,0,0])
-//		rotate([0,-90,0])
-//		Mirage2000_body(fuselageH,fuselageLength,fuselageThickness);
+//	union(){
+//		translate([-fuselageThickness/2,wingLength + wingPos,0])
+//		rotate([90,0,-90])
+//		wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
 
-	}
+////		translate([fuselageThickness/2,0,0])
+////		rotate([0,-90,0])
+////		Mirage2000_body(fuselageH,fuselageLength,fuselageThickness);
 
-	translate([0,motor1_pos+wingPos,motor_rad-e])
-	rotate([-90,0,0])
-	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+//	}
 
-	translate([0,motor2_pos+wingPos,motor_rad-e])
-	rotate([-90,0,0])
-	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
-	
-	// aileron cut out
-	translate([-aileronStart+wiggleRoom,wingPos+aileronDepth,0])
-	rotate([90,0,-90])
-	controlSurfaceCutout( aileronLength+2*wiggleRoom, 2*aileronThickness, 1.25*aileronDepth );
-	
-	// rudder cut out
-	translate([-fuselageThickness/2,rudderDepth,rudderStart+fuselageH -wiggleRoom])
-	rotate([0,0,-90])
-	controlSurfaceCutout( rudderLength+2*wiggleRoom, 2*rudderThickness, 1.25*rudderDepth );
+//	translate([0,motor1_pos+wingPos,motor_rad-e])
+//	rotate([-90,0,0])
+//	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
 
-}
+//	translate([0,motor2_pos+wingPos,motor_rad-e])
+//	rotate([-90,0,0])
+//	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+//	
+//	// aileron cut out
+//	translate([-aileronStart+wiggleRoom,wingPos+aileronDepth,0])
+//	rotate([90,0,-90])
+//	controlSurfaceCutout( aileronLength+2*wiggleRoom, 2*aileronThickness, 1.25*aileronDepth );
+//	
+//	// rudder cut out
+//	translate([-fuselageThickness/2,rudderDepth,rudderStart+fuselageH -wiggleRoom])
+//	rotate([0,0,-90])
+//	controlSurfaceCutout( rudderLength+2*wiggleRoom, 2*rudderThickness, 1.25*rudderDepth );
 
-}
+//}
+
+//}
 
 
 
@@ -347,46 +347,46 @@ difference() {
 
 
 
-//// fuselage 3/3
-//intersection(){
+// fuselage 3/3
+intersection(){
 
-//translate([-200,500-180-2*220,-50])
-//cube([220,220,220]);
+translate([-200,500-180-2*220,-50])
+cube([220,220,220]);
 
-//difference() {
+difference() {
 
-//	union(){
-////		translate([-fuselageThickness/2,wingLength + wingPos,0])
-////		rotate([90,0,-90])
-////		wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
+	union(){
+//		translate([-fuselageThickness/2,wingLength + wingPos,0])
+//		rotate([90,0,-90])
+//		wing( wingLength, wingRootHeight, wingTipLength, wingTipHeight, wingSpan );
 
-//		translate([fuselageThickness/2,0,0])
-//		rotate([0,-90,0])
-//		Mirage2000_body(fuselageH,fuselageLength,fuselageThickness);
+		translate([fuselageThickness/2,0,0])
+		rotate([0,-90,0])
+		Mirage2000_body(fuselageH,fuselageLength,fuselageThickness);
 
-//	}
+	}
 
-//	translate([0,motor1_pos+wingPos,motor_rad-e])
-//	rotate([-90,0,0])
-//	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+	translate([0,motor1_pos+wingPos,motor_rad-e])
+	rotate([-90,0,0])
+	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
 
-//	translate([0,motor2_pos+wingPos,motor_rad-e])
-//	rotate([-90,0,0])
-//	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
-//	
-//	// aileron cut out
-//	translate([-aileronStart+wiggleRoom,wingPos+aileronDepth,0])
-//	rotate([90,0,-90])
-//	controlSurfaceCutout( aileronLength+2*wiggleRoom, 2*aileronThickness, 1.25*aileronDepth );
-//	
-//	// rudder cut out
-//	translate([-fuselageThickness/2,rudderDepth,rudderStart+fuselageH -wiggleRoom])
-//	rotate([0,0,-90])
-//	controlSurfaceCutout( rudderLength+2*wiggleRoom, 2*rudderThickness, 1.25*rudderDepth );
+	translate([0,motor2_pos+wingPos,motor_rad-e])
+	rotate([-90,0,0])
+	motorCutOut( motor_length, 2*motor_rad, prop_rad, prop_thick );
+	
+	// aileron cut out
+	translate([-aileronStart+wiggleRoom,wingPos+aileronDepth,0])
+	rotate([90,0,-90])
+	controlSurfaceCutout( aileronLength+2*wiggleRoom, 2*aileronThickness, 1.25*aileronDepth );
+	
+	// rudder cut out
+	translate([-fuselageThickness/2,rudderDepth,rudderStart+fuselageH -wiggleRoom])
+	rotate([0,0,-90])
+	controlSurfaceCutout( rudderLength+2*wiggleRoom, 2*rudderThickness, 1.25*rudderDepth );
 
-//}
+}
 
-//}
+}
 
 
 
