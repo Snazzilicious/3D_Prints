@@ -10,7 +10,7 @@ module motorCutOut( length, width, rad, spac ) {
 
 // x goes from 0 to 1, t determines thickness
 function naca_half_thickness(x,t) = 5*t*(0.2969*sqrt(x) - 0.1260*x - 0.3516*pow(x,2) + 0.2843*pow(x,3) - 0.1015*pow(x,4));
-function naca_pts(t,n,s=1) = [ for (x=[0:1/(n-1):1]) [s*x, s*naca_half_thickness(x,t)]];
+function naca_pts(t,n,s=1) = concat([ for (x=[0:1/(n-1):1-(1/n)]) [s*x, s*naca_half_thickness(x,t)] ], [[s,0]]);
 module wing(rootLength,root_h, tipLength,tip_h, span){
 
 	root_t = 2*root_h / rootLength;
