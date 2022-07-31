@@ -119,12 +119,11 @@ module controlSurfaceCutout(l,th,d,h=50){
 	}
 }
 
-
 // Fudge factor
 e = 0.001;
 
 // Wing parameters
-wingLength = 380.0;
+wingLength = 292.0;
 wingRootHeight = 7;
 
 wingTipLength = 20.0;
@@ -138,11 +137,11 @@ motor_length = 23.0;
 prop_rad = 35.0;
 prop_thick = 10.0;
 
-motor1_pos = 0.7*wingLength;
-motor2_pos = 0.55*wingLength;
+motor1_pos = wingLength - prop_thick - motor_length - 2*(prop_rad + 5);
+motor2_pos = motor1_pos - (prop_thick+1.5*motor_length);
 
 // Aileron and aileron cut out specifications
-aileronStart = 30;
+aileronStart = 15;
 aileronLength = 100;
 aileronDepth = 30;
 aileronThickness = 3;
@@ -154,10 +153,10 @@ rudderDepth = 30;
 rudderThickness = 3;
 
 // control surface wiggle room
-wiggleRoom = 1;
+wiggleRoom = 2;
 
 // Body specifications
-fuselageLength = 430.0;
+fuselageLength = 344.0;
 fuselageH = motor_rad + prop_rad + 10;
 fuselageThickness = 3.0;
 
