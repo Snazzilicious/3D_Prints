@@ -1,13 +1,13 @@
 
 e=0.1;
 
-thickness = 10;
+thickness = 5;
 
-gap = 20;
+gap = 17;
 
 radius = gap/2+thickness;
 
-adtlSpace = gap;
+adtlSpace = 2*gap;
 
 module arch(){
 	difference(){
@@ -31,9 +31,14 @@ linear_extrude(thickness){
 		translate([-radius,-gap-adtlSpace-e/2])
 		square([thickness,gap+adtlSpace+e]);
 
-		translate([-radius,-gap-adtlSpace/2])
-		square([thickness,gap]);
+		translate([-radius,-gap-adtlSpace/2-thickness/2])
+		square([thickness,gap+thickness]);
 	}
+	
+	translate([-radius+thickness/2,-adtlSpace/2+thickness/2+e/2])
+	circle(thickness/2);
+	translate([-radius+thickness/2,-gap-adtlSpace/2-thickness/2-e/2])
+	circle(thickness/2);
 }
 
 
