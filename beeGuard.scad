@@ -1,11 +1,13 @@
 
+$fn = 100;
+
 thickness = 1.0;
 space = 1.9;
 radius = 15;
 
 gapSize = (radius-3*space) / 2;
 
-spoutRadius = 3.6;
+spoutRadius = 4;
 
 holeRadius = 2;
 
