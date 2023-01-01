@@ -21,7 +21,7 @@ module wingCS(Length,h){
 wingLength = 90.0;
 wingHeight = 7;
 
-wingSpan = 200;
+wingSpan = 100;
 
 wallThickness = 0.4;
 
@@ -35,36 +35,38 @@ linear_extrude(wingSpan){
 }
 
 // internal supports
-difference(){
-	intersection(){
+difference()
+{
+	intersection()
+	{
 		linear_extrude(wingSpan){
 			offset(delta=e)
 			wingCS( wingLength, wingHeight );
 		}
-		for(x=[-100:33:200]){
+		for(x=[-104:50:200]){
 			translate([0,0,x])
 			translate([0,-wingHeight,0])
 			rotate([0,40,0])
-			cube([1.5*wallThickness,3*wingHeight,wingSpan]);
+			cube([1.5*wallThickness,3*wingHeight,5*wingSpan]);
 			
 			translate([0,0,x])
 			translate([wingLength,-wingHeight,0])
 			rotate([0,-40,0])
-			cube([1.5*wallThickness,3*wingHeight,wingSpan]);
+			cube([1.5*wallThickness,3*wingHeight,5*wingSpan]);
 		}
 	}
 translate([-2*e,-2*e,-2*e])
-cube([1.1*wingLength,0.4+wallThickness+2*e,1.1*wingSpan]);
+cube([1.1*wingLength,0.1+wallThickness+2*e,1.1*wingSpan]);
 
 
 translate([0.2*wingLength, 0.5*wingHeight, -e])
-cylinder(r=0.3*wingHeight, h=1.1*wingSpan);
+cylinder(r=0.6*wingHeight, h=1.1*wingSpan);
 
 translate([0.35*wingLength, 0.55*wingHeight, -e])
-cylinder(r=0.3*wingHeight, h=1.1*wingSpan);
+cylinder(r=0.6*wingHeight, h=1.1*wingSpan);
 
 translate([0.5*wingLength, 0.5*wingHeight, -e])
-cylinder(r=0.25*wingHeight, h=1.1*wingSpan);
+cylinder(r=0.5*wingHeight, h=1.1*wingSpan);
 }
 
 
