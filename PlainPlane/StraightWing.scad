@@ -58,10 +58,10 @@ cube([1.1*wingLength,0.4+wallThickness+2*e,1.1*wingSpan]);
 
 
 translate([0.2*wingLength, 0.5*wingHeight, -e])
-cylinder(r=0.25*wingHeight, h=1.1*wingSpan);
+cylinder(r=0.3*wingHeight, h=1.1*wingSpan);
 
 translate([0.35*wingLength, 0.55*wingHeight, -e])
-cylinder(r=0.25*wingHeight, h=1.1*wingSpan);
+cylinder(r=0.3*wingHeight, h=1.1*wingSpan);
 
 translate([0.5*wingLength, 0.5*wingHeight, -e])
 cylinder(r=0.25*wingHeight, h=1.1*wingSpan);
