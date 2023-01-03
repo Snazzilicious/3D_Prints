@@ -92,6 +92,7 @@ difference()
 		}
 	}
 
+	translate([0,0,-e])
 	linear_extrude(1.1*wingSpan){
 		translate([-0.005*chord,0])
 		wingCS(1.01*chord,0.2);
