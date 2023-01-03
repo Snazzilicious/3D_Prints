@@ -59,14 +59,14 @@ translate([-2*e,-2*e,-2*e])
 cube([1.1*wingLength,0.1+wallThickness+2*e,1.1*wingSpan]);
 
 
-translate([0.2*wingLength, 0.5*wingHeight, -e])
+translate([0.16*wingLength, 0.15*wingHeight, -e])
+cylinder(r=0.55*wingHeight, h=1.1*wingSpan);
+
+translate([0.39*wingLength, 0.15*wingHeight, -e])
 cylinder(r=0.6*wingHeight, h=1.1*wingSpan);
 
-translate([0.35*wingLength, 0.55*wingHeight, -e])
-cylinder(r=0.6*wingHeight, h=1.1*wingSpan);
-
-translate([0.5*wingLength, 0.5*wingHeight, -e])
-cylinder(r=0.5*wingHeight, h=1.1*wingSpan);
+translate([0.6*wingLength, 0.15*wingHeight, -e])
+cylinder(r=0.45*wingHeight, h=1.1*wingSpan);
 }
 
 
