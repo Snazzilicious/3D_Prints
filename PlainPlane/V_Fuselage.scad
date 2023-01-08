@@ -23,10 +23,10 @@ translate([0,0,-tailDepth])
 linear_extrude(tailDepth+e)
 crossSec( tailHeight, wallThickness );
 
-linear_extrude(secLength+e)
+linear_extrude(secLength-tailDepth+e)
 crossSec( height, wallThickness );
 
-translate([0,0,secLength])
+translate([0,0,secLength-tailDepth])
 linear_extrude(secLength+e)
 crossSec( height, wallThickness );
 
