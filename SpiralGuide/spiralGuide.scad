@@ -54,9 +54,9 @@ module polyline(points, width = 1) {
 
 PI = 3.14159;
 
-h = 10;
-thickness = 10;
-radius = 8.5*25.4 / 2 + 5; // 12*25.0;
+h = 4;
+thickness = 13;
+radius = 8.5*25.4 / 2 - thickness/2; // 12*25.0;
 circles = 4; // = radius / space;
 
 space = radius / circles;
@@ -70,9 +70,11 @@ points = [for(theta = [0:step:2 * PI * circles])
 ];
 
 linear_extrude(h)
-//difference()
-//{
-//translate([8,-5])
-//circle(r=radius+2);
+difference()
+{
+translate([6,-5])
+circle(r=radius+2);
 polyline(points, thickness);
-//}
+}
+
+circle(r=8.5*25.4 / 2);
